@@ -1,0 +1,654 @@
+{
+  "nodes": [
+    {
+      "id": 1,
+      "text": "Your Interests",
+      "x": 2018,
+      "y": 1188,
+      "size": 300,
+      "colorIndex": 0,
+      "connections": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        24
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Infrastructure & DevOps",
+      "x": 1246,
+      "y": 402,
+      "size": 185,
+      "colorIndex": 1,
+      "connections": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Software Engineering",
+      "x": 2448,
+      "y": 838,
+      "size": 145,
+      "colorIndex": 7,
+      "connections": [
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Game Development",
+      "x": 3776,
+      "y": 1215,
+      "size": 130,
+      "colorIndex": 7,
+      "connections": [
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Networking",
+      "x": 2811,
+      "y": 2184,
+      "size": 140,
+      "colorIndex": 6,
+      "connections": [
+        21,
+        22,
+        23
+      ]
+    },
+    {
+      "id": 6,
+      "text": "Virtualization",
+      "x": 594,
+      "y": 2016,
+      "size": 140,
+      "colorIndex": 5,
+      "connections": [
+        24,
+        25
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Creative Tools",
+      "x": 438,
+      "y": 1007,
+      "size": 120,
+      "colorIndex": 6,
+      "connections": [
+        26,
+        27
+      ]
+    },
+    {
+      "id": 8,
+      "text": "Personal Finance",
+      "x": 1999,
+      "y": 2767,
+      "size": 110,
+      "colorIndex": 7,
+      "connections": [
+        28
+      ]
+    },
+    {
+      "id": 9,
+      "text": "History & Culture",
+      "x": 2000,
+      "y": 200,
+      "size": 125,
+      "colorIndex": 7,
+      "connections": [
+        29
+      ]
+    },
+    {
+      "id": 10,
+      "text": "Kubernetes",
+      "x": 800,
+      "y": 100,
+      "size": 125,
+      "colorIndex": 1,
+      "connections": [
+        30,
+        31,
+        32,
+        33
+      ]
+    },
+    {
+      "id": 11,
+      "text": "GitOps & CI/CD",
+      "x": 1400,
+      "y": 100,
+      "size": 105,
+      "colorIndex": 5,
+      "connections": [
+        34,
+        35
+      ]
+    },
+    {
+      "id": 12,
+      "text": "Storage & Databases",
+      "x": 1000,
+      "y": 600,
+      "size": 115,
+      "colorIndex": 7,
+      "connections": [
+        36
+      ]
+    },
+    {
+      "id": 13,
+      "text": "Linux Systems",
+      "x": 1600,
+      "y": 600,
+      "size": 115,
+      "colorIndex": 7,
+      "connections": [
+        37,
+        38
+      ]
+    },
+    {
+      "id": 14,
+      "text": "Backend Development",
+      "x": 2600,
+      "y": 100,
+      "size": 140,
+      "colorIndex": 5,
+      "connections": [
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "id": 15,
+      "text": "Architecture Patterns",
+      "x": 3511,
+      "y": 204,
+      "size": 125,
+      "colorIndex": 6,
+      "connections": [
+        42,
+        43
+      ]
+    },
+    {
+      "id": 16,
+      "text": "Authentication",
+      "x": 2698,
+      "y": 677,
+      "size": 130,
+      "colorIndex": 2,
+      "connections": [
+        44
+      ]
+    },
+    {
+      "id": 17,
+      "text": "Career Development",
+      "x": 3200,
+      "y": 600,
+      "size": 130,
+      "colorIndex": 2,
+      "connections": [
+        45
+      ]
+    },
+    {
+      "id": 18,
+      "text": "Unity Development",
+      "x": 3832,
+      "y": 993,
+      "size": 105,
+      "colorIndex": 3,
+      "connections": [
+        46,
+        47
+      ]
+    },
+    {
+      "id": 19,
+      "text": "Retro Game Dev",
+      "x": 3850,
+      "y": 1466,
+      "size": 105,
+      "colorIndex": 3,
+      "connections": [
+        48,
+        49
+      ]
+    },
+    {
+      "id": 20,
+      "text": "3D Modeling",
+      "x": 3561,
+      "y": 1425,
+      "size": 130,
+      "colorIndex": 3,
+      "connections": [
+        50
+      ]
+    },
+    {
+      "id": 21,
+      "text": "VPN & Remote Access",
+      "x": 3144,
+      "y": 2189,
+      "size": 125,
+      "colorIndex": 6,
+      "connections": [
+        51
+      ]
+    },
+    {
+      "id": 22,
+      "text": "Network Fundamentals",
+      "x": 2800,
+      "y": 2400,
+      "size": 165,
+      "colorIndex": 4,
+      "connections": [
+        52,
+        53
+      ]
+    },
+    {
+      "id": 23,
+      "text": "Security",
+      "x": 2505,
+      "y": 2276,
+      "size": 100,
+      "colorIndex": 6,
+      "connections": [
+        54
+      ]
+    },
+    {
+      "id": 24,
+      "text": "Proxmox",
+      "x": 787,
+      "y": 2200,
+      "size": 175,
+      "colorIndex": 3,
+      "connections": [
+        55,
+        56,
+        57
+      ]
+    },
+    {
+      "id": 25,
+      "text": "Hypervisors",
+      "x": 1001,
+      "y": 2204,
+      "size": 155,
+      "colorIndex": 5,
+      "connections": [
+        58
+      ]
+    },
+    {
+      "id": 26,
+      "text": "Fantasy Consoles",
+      "x": 200,
+      "y": 1000,
+      "size": 130,
+      "colorIndex": 6,
+      "connections": [
+        59,
+        60
+      ]
+    },
+    {
+      "id": 27,
+      "text": "3D Creation",
+      "x": 301,
+      "y": 1217,
+      "size": 120,
+      "colorIndex": 6,
+      "connections": [
+        61
+      ]
+    },
+    {
+      "id": 28,
+      "text": "Swedish Housing Market",
+      "x": 2000,
+      "y": 2900,
+      "size": 125,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 29,
+      "text": "Swedish History",
+      "x": 2007,
+      "y": 11,
+      "size": 130,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 30,
+      "text": "Cluster Management",
+      "x": 493,
+      "y": 42,
+      "size": 145,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 31,
+      "text": "Helm & Packages",
+      "x": 648,
+      "y": -53,
+      "size": 115,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 32,
+      "text": "Networking (CNI)",
+      "x": 806,
+      "y": -58,
+      "size": 120,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 33,
+      "text": "Troubleshooting",
+      "x": 1021,
+      "y": 15,
+      "size": 130,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 34,
+      "text": "Flux",
+      "x": 1245,
+      "y": -42,
+      "size": 105,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 35,
+      "text": "GitOps Workflows",
+      "x": 1419,
+      "y": -52,
+      "size": 120,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 36,
+      "text": "Longhorn Storage",
+      "x": 996,
+      "y": 722,
+      "size": 105,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 37,
+      "text": "Debian Administration",
+      "x": 1509,
+      "y": 438,
+      "size": 140,
+      "colorIndex": 6,
+      "connections": []
+    },
+    {
+      "id": 38,
+      "text": "Firewall & Security",
+      "x": 1742,
+      "y": 487,
+      "size": 110,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 39,
+      "text": "C# Programming",
+      "x": 2399,
+      "y": -100,
+      "size": 125,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 40,
+      "text": "Generics & Types",
+      "x": 2600,
+      "y": -100,
+      "size": 125,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 41,
+      "text": "API Development",
+      "x": 2777,
+      "y": -97,
+      "size": 120,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 42,
+      "text": "Microservices",
+      "x": 3000,
+      "y": -100,
+      "size": 145,
+      "colorIndex": 7,
+      "connections": []
+    },
+    {
+      "id": 43,
+      "text": "Outbox Pattern",
+      "x": 3498,
+      "y": 17,
+      "size": 120,
+      "colorIndex": 6,
+      "connections": []
+    },
+    {
+      "id": 44,
+      "text": "OAuth & Identity",
+      "x": 2679,
+      "y": 891,
+      "size": 125,
+      "colorIndex": 4,
+      "connections": [
+        3
+      ]
+    },
+    {
+      "id": 45,
+      "text": "Senior Engineer Path",
+      "x": 3196,
+      "y": 759,
+      "size": 125,
+      "colorIndex": 2,
+      "connections": []
+    },
+    {
+      "id": 46,
+      "text": "Multiplayer Systems",
+      "x": 4000,
+      "y": 900,
+      "size": 120,
+      "colorIndex": 3,
+      "connections": []
+    },
+    {
+      "id": 47,
+      "text": "Animation",
+      "x": 4000,
+      "y": 1100,
+      "size": 105,
+      "colorIndex": 3,
+      "connections": []
+    },
+    {
+      "id": 48,
+      "text": "PICO-8",
+      "x": 4004,
+      "y": 1385,
+      "size": 120,
+      "colorIndex": 3,
+      "connections": []
+    },
+    {
+      "id": 49,
+      "text": "TIC-80",
+      "x": 4011,
+      "y": 1556,
+      "size": 125,
+      "colorIndex": 3,
+      "connections": []
+    },
+    {
+      "id": 50,
+      "text": "Blender Basics",
+      "x": 3548,
+      "y": 1131,
+      "size": 130,
+      "colorIndex": 3,
+      "connections": []
+    },
+    {
+      "id": 51,
+      "text": "WireGuard",
+      "x": 3298,
+      "y": 2192,
+      "size": 125,
+      "colorIndex": 6,
+      "connections": [
+        21
+      ]
+    },
+    {
+      "id": 52,
+      "text": "Bridge & iptables",
+      "x": 2738,
+      "y": 2601,
+      "size": 105,
+      "colorIndex": 6,
+      "connections": []
+    },
+    {
+      "id": 53,
+      "text": "ClusterIP & Services",
+      "x": 2899,
+      "y": 2605,
+      "size": 105,
+      "colorIndex": 6,
+      "connections": []
+    },
+    {
+      "id": 54,
+      "text": "Network Security",
+      "x": 2505,
+      "y": 2401,
+      "size": 100,
+      "colorIndex": 6,
+      "connections": []
+    },
+    {
+      "id": 55,
+      "text": "VM Management",
+      "x": 600,
+      "y": 2400,
+      "size": 150,
+      "colorIndex": 5,
+      "connections": []
+    },
+    {
+      "id": 56,
+      "text": "Clustering",
+      "x": 800,
+      "y": 2400,
+      "size": 155,
+      "colorIndex": 5,
+      "connections": []
+    },
+    {
+      "id": 57,
+      "text": "Storage Config",
+      "x": 1000,
+      "y": 2400,
+      "size": 150,
+      "colorIndex": 5,
+      "connections": []
+    },
+    {
+      "id": 58,
+      "text": "XCP-ng & Alternatives",
+      "x": 595,
+      "y": 2207,
+      "size": 150,
+      "colorIndex": 5,
+      "connections": []
+    },
+    {
+      "id": 59,
+      "text": "PICO-8 Community",
+      "x": -6,
+      "y": 851,
+      "size": 155,
+      "colorIndex": 6,
+      "connections": []
+    },
+    {
+      "id": 60,
+      "text": "TIC-80 Development",
+      "x": -36,
+      "y": 1113,
+      "size": 185,
+      "colorIndex": 6,
+      "connections": []
+    },
+    {
+      "id": 61,
+      "text": "Blender",
+      "x": 561,
+      "y": 1223,
+      "size": 100,
+      "colorIndex": 6,
+      "connections": []
+    }
+  ],
+  "theme": "red",
+  "designStyle": "brutalist",
+  "zoomLevel": 0.30000000000000004,
+  "panOffset": {
+    "x": -504,
+    "y": -219
+  },
+  "animationEnabled": true,
+  "showIds": true
+}

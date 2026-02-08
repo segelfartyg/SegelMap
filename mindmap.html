@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Mindmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .node {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: move;
+            user-select: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 20px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        .node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .node.dragging {
+            opacity: 0.8;
+            transform: scale(1.15);
+        }
+
+        .node.editing {
+            cursor: text;
+            outline: 3px solid rgba(255, 255, 255, 0.8);
+            outline-offset: 3px;
+            user-select: text;
+        }
+
+        .node[contenteditable="true"] {
+            cursor: text;
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .controls h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .controls button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .controls button:hover {
+            background: #5568d3;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="controls">
+        <h3>Interactive Mindmap</h3>
+        <p style="font-size: 12px; color: #666; margin-bottom: 10px;">Drag to move, double-click to edit!</p>
+        <button onclick="resetPositions()">Reset Positions</button>
+        <button onclick="toggleAnimation()">Toggle Float</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Mindmap data structure
+        const nodes = [
+            { id: 1, text: 'Main Idea', x: window.innerWidth / 2, y: window.innerHeight / 2, size: 120, color: '#FF6B6B', connections: [2, 3, 4] },
+            { id: 2, text: 'Concept A', x: window.innerWidth / 2 - 250, y: window.innerHeight / 2 - 150, size: 100, color: '#4ECDC4', connections: [5, 6] },
+            { id: 3, text: 'Concept B', x: window.innerWidth / 2 + 250, y: window.innerHeight / 2 - 150, size: 100, color: '#45B7D1', connections: [7] },
+            { id: 4, text: 'Concept C', x: window.innerWidth / 2, y: window.innerHeight / 2 + 200, size: 100, color: '#F7DC6F', connections: [8] },
+            { id: 5, text: 'Detail 1', x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 250, size: 80, color: '#95E1D3', connections: [] },
+            { id: 6, text: 'Detail 2', x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 50, size: 80, color: '#A8E6CF', connections: [] },
+            { id: 7, text: 'Detail 3', x: window.innerWidth / 2 + 400, y: window.innerHeight / 2 - 250, size: 80, color: '#FFD3B6', connections: [] },
+            { id: 8, text: 'Detail 4', x: window.innerWidth / 2 + 150, y: window.innerHeight / 2 + 350, size: 80, color: '#FFAAA5', connections: [] }
+        ];
+
+        // Store original positions for reset
+        const originalPositions = nodes.map(node => ({ x: node.x, y: node.y }));
+
+        // Animation state
+        let animationEnabled = true;
+        let animationTime = 0;
+
+        // Drag state
+        let draggedNode = null;
+        let offsetX = 0;
+        let offsetY = 0;
+        let hasMoved = false;
+        let editingNode = null;
+
+        // Create DOM elements for nodes
+        nodes.forEach(node => {
+            const div = document.createElement('div');
+            div.className = 'node';
+            div.id = 'node-' + node.id;
+            div.textContent = node.text;
+            div.style.width = node.size + 'px';
+            div.style.height = node.size + 'px';
+            div.style.backgroundColor = node.color;
+            div.style.left = (node.x - node.size / 2) + 'px';
+            div.style.top = (node.y - node.size / 2) + 'px';
+
+            // Add event listeners for dragging and editing
+            div.addEventListener('mousedown', startDrag);
+            div.addEventListener('dblclick', startEditing);
+
+            document.body.appendChild(div);
+        });
+
+        function startDrag(e) {
+            // Don't start drag if we're editing
+            if (e.target.contentEditable === 'true') {
+                return;
+            }
+
+            const nodeId = parseInt(e.target.id.split('-')[1]);
+            draggedNode = nodes.find(n => n.id === nodeId);
+
+            if (draggedNode) {
+                hasMoved = false;
+                offsetX = e.clientX - draggedNode.x;
+                offsetY = e.clientY - draggedNode.y;
+
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', stopDrag);
+            }
+        }
+
+        function drag(e) {
+            if (draggedNode) {
+                hasMoved = true;
+                const div = document.getElementById('node-' + draggedNode.id);
+                div.classList.add('dragging');
+
+                draggedNode.x = e.clientX - offsetX;
+                draggedNode.y = e.clientY - offsetY;
+                updateNodePosition(draggedNode);
+            }
+        }
+
+        function stopDrag(e) {
+            if (draggedNode) {
+                document.getElementById('node-' + draggedNode.id).classList.remove('dragging');
+                draggedNode = null;
+
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', stopDrag);
+            }
+        }
+
+        function updateNodePosition(node) {
+            const div = document.getElementById('node-' + node.id);
+            div.style.left = (node.x - node.size / 2) + 'px';
+            div.style.top = (node.y - node.size / 2) + 'px';
+        }
+
+        function startEditing(e) {
+            // Only allow editing if we didn't just drag
+            if (hasMoved) {
+                return;
+            }
+
+            const nodeId = parseInt(e.target.id.split('-')[1]);
+            const node = nodes.find(n => n.id === nodeId);
+
+            if (node && editingNode !== node) {
+                // Stop editing any other node
+                stopEditing();
+
+                editingNode = node;
+                const div = document.getElementById('node-' + node.id);
+                div.contentEditable = 'true';
+                div.classList.add('editing');
+                div.style.cursor = 'text';
+
+                // Select all text
+                const range = document.createRange();
+                range.selectNodeContents(div);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+
+                // Add listeners for finishing edit
+                div.addEventListener('blur', finishEditing);
+                div.addEventListener('keydown', handleEditKeydown);
+            }
+        }
+
+        function handleEditKeydown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                e.target.blur();
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                // Restore original text
+                if (editingNode) {
+                    e.target.textContent = editingNode.text;
+                }
+                e.target.blur();
+            }
+        }
+
+        function finishEditing(e) {
+            if (editingNode) {
+                const div = document.getElementById('node-' + editingNode.id);
+                const newText = div.textContent.trim();
+
+                if (newText) {
+                    editingNode.text = newText;
+                } else {
+                    // Restore original text if empty
+                    div.textContent = editingNode.text;
+                }
+
+                stopEditing();
+            }
+        }
+
+        function stopEditing() {
+            if (editingNode) {
+                const div = document.getElementById('node-' + editingNode.id);
+                div.contentEditable = 'false';
+                div.classList.remove('editing');
+                div.style.cursor = 'move';
+                div.removeEventListener('blur', finishEditing);
+                div.removeEventListener('keydown', handleEditKeydown);
+
+                // Clear selection
+                window.getSelection().removeAllRanges();
+
+                editingNode = null;
+            }
+        }
+
+        function drawConnections() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            nodes.forEach(node => {
+                node.connections.forEach(targetId => {
+                    const targetNode = nodes.find(n => n.id === targetId);
+                    if (targetNode) {
+                        ctx.beginPath();
+                        ctx.moveTo(node.x, node.y);
+                        ctx.lineTo(targetNode.x, targetNode.y);
+                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                        ctx.lineWidth = 3;
+                        ctx.stroke();
+                    }
+                });
+            });
+        }
+
+        function animate() {
+            if (animationEnabled && !draggedNode && !editingNode) {
+                animationTime += 0.01;
+
+                nodes.forEach((node, index) => {
+                    // Gentle floating animation
+                    const originalX = originalPositions[index].x;
+                    const originalY = originalPositions[index].y;
+
+                    node.x = originalX + Math.sin(animationTime + index) * 20;
+                    node.y = originalY + Math.cos(animationTime + index * 0.5) * 20;
+
+                    updateNodePosition(node);
+                });
+            }
+
+            drawConnections();
+            requestAnimationFrame(animate);
+        }
+
+        function resetPositions() {
+            nodes.forEach((node, index) => {
+                node.x = originalPositions[index].x;
+                node.y = originalPositions[index].y;
+                updateNodePosition(node);
+            });
+            animationTime = 0;
+        }
+
+        function toggleAnimation() {
+            animationEnabled = !animationEnabled;
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Start animation loop
+        animate();
+    </script>
+</body>
+</html>
